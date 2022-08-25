@@ -1,15 +1,14 @@
-
-<%= button_to "Receive email", emails_path, class: "btn", remote: true %>
-<section class="w-full h-full flex border-2 rounded-lg">
-  <div class="flex flex-col flex-1 h-full border-r">
+<%= button_to "Generate email", emails_path, remote: true %>
+<section class="w-full h-full flex border-2 border-slate-600 rounded-lg">
+  <div id="index" class="flex flex-col min-w-[256px] h-full border-r border-slate-600 p-8">
     <h2 class="self-center">All emails</h2>
     <ul>
       <% @emails.each do |email| %>
-        <li class="my-4 mx-8 place-self-start text-lg"><%= email.object %></li>
+        <li id="email-<%= email.id %>" class="my-4 place-self-start text-lg"><%= link_to  email.object, email, remote: true %></li>
       <% end %>
     </ul>
   </div>
-  <div class="flex flex-col items-center flex-1 h-full">
+  <div id="show" class="flex flex-col items-center flex-1 h-full p-8">
     <h2>Selected email</h2>
   </div>
 </section>

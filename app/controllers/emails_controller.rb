@@ -7,7 +7,14 @@ class EmailsController < ApplicationController
   end
 
   # GET /emails/1 or /emails/1.json
-  def show; end
+  def show
+    @email = Email.find(params[:id])
+
+    respond_to do |format|
+      format.html { render :show }
+      format.js
+    end
+  end
 
   # GET /emails/new
   def new
@@ -20,17 +27,17 @@ class EmailsController < ApplicationController
   # POST /emails or /emails.json
   def create
     @email = Email.new(
-      object: Faker::TvShows::SiliconValley.unique.app,
-      body: Faker::TvShows::SiliconValley.unique.quote
+      object: Faker::TvShows::SiliconValley.app,
+      body: Faker::TvShows::SiliconValley.quote
     )
 
     respond_to do |format|
       if @email.save
-        # format.html { redirect_to email_url(@email), notice: 'Email was successfully created.' }
+        format.html { redirect_to email_url(@email), notice: 'Email was successfully created.' }
         format.js { render :create }
       else
-        # format.html { render :new, status: :unprocessable_entity }
-        # format.js { render json: @email.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @email.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,7 +61,7 @@ class EmailsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to emails_url, notice: 'Email was successfully destroyed.' }
-      format.json { head :no_content }
+      format.js
     end
   end
 

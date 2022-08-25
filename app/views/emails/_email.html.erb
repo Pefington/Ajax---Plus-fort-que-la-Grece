@@ -1,1 +1,8 @@
-<li class="my-4 mx-8 place-self-start text-lg"><%= email.object %></li>
+<article class="w-full h-full flex flex-col items-center">
+  <h3 class="my-4 text-lg font-semibold underline"><%= email.object %></h3>
+  <p><%= email.body %></p>
+  <div class="flex justify-center w-full">
+    <%= button_to 'Delete', email, method: :delete, remote: true %>
+    <%= link_to 'Mark unread', edit_email_path(@email), class: "btn" %>
+  </div>
+</article>

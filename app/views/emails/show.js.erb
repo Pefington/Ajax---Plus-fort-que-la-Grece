@@ -1,0 +1,6 @@
+container = document.querySelector("#show")
+article = container.querySelector("article")
+
+if (article) article.remove()
+
+container.insertAdjacentHTML("beforeend", "<%= j render 'email', email: @email %>")
