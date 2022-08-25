@@ -68,3 +68,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # https://tailwindcss.com/docs/flex
 gem 'tailwindcss-rails', '~> 2.0'
+
+gem "faker", "~> 2.22", :group => :development
