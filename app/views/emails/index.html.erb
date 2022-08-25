@@ -1,6 +1,6 @@
 <%= button_to "Generate email", emails_path, remote: true %>
 <section class="w-full h-full flex border-2 border-slate-600 rounded-lg">
-  <div id="index" class="flex flex-col min-w-[256px] h-full border-r border-slate-600">
+  <div id="index" class="flex flex-col min-w-[256px] h-full border-r border-slate-600 py-8">
     <h2 class="self-center">All emails</h2>
     <ul>
       <% @emails.each do |email| %>
