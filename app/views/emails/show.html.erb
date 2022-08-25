@@ -1,7 +1,5 @@
 <article class="flex flex-col p-4">
   <%= render @email %>
   <div class="flex w-full justify-evenly">
-    <%= link_to 'Edit this email', edit_email_path(@email), class: "btn" %>
-    <%= button_to 'Destroy this email', email_path(@email), method: :delete, class: "btn" %>
   </div>
 </article>

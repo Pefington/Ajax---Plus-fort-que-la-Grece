@@ -1,5 +1,4 @@
 id = "#email-<%= @email.id %>"
-email = document.querySelector(id)
 container = document.querySelector("#show")
 article = document.querySelector("article")
 
@@ -9,6 +8,7 @@ container.insertAdjacentHTML("beforeend", "<%= j render 'email', email: @email %
 
 isRead = <%= @email.read %>
 
+email = document.querySelector(id)
 if (isRead) {
   email.classList.remove("unread")
   email.classList.add("read")

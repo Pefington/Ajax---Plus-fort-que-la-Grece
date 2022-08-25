@@ -1,13 +1,13 @@
 <%= button_to "Generate email", emails_path, remote: true %>
 <section class="w-full h-full flex border-2 border-slate-600 rounded-lg">
-  <div id="index" class="flex flex-col min-w-[256px] h-full border-r border-slate-600 p-8">
+  <div id="index" class="flex flex-col min-w-[256px] h-full border-r border-slate-600">
     <h2 class="self-center">All emails</h2>
     <ul>
       <% @emails.each do |email| %>
         <% if email.read %>
-          <li id="email-<%= email.id %>" class="read"><%= link_to email.object, email, remote: true %></li>
+          <li id="email-<%= email.id %>" class="read"><%= email.object %></li>
         <% else %>
-          <li id="email-<%= email.id %>" class="unread"><%= link_to email.object, email, remote: true %></li>
+          <li id="email-<%= email.id %>" class="unread"><%= email.object %></li>
         <% end %>
       <% end %>
     </ul>
@@ -16,3 +16,27 @@
     <h2>Selected email</h2>
   </div>
 </section>
+<script>
+  const emails = document.querySelectorAll('#index li');
+  emails.forEach(li => {
+    // console.log(li.id)
+    li.addEventListener('click', e => {
+      e.preventDefault();
+      isRead = li.classList.contains('read');
+      id = li.id;
+      urlId = e.target.id.split('-')[1];
+
+      li.classList.remove("unread")
+      li.classList.add("read")
+
+      url = `/emails/${urlId}`;
+
+      fetch(url)
+        .then(response => response.text())
+        .then(html => {
+          const show = document.querySelector('#show');
+          show.innerHTML = html;
+        });
+    });
+  });
+</script>
