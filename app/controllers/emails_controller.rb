@@ -1,5 +1,5 @@
 class EmailsController < ApplicationController
-  before_action :set_email, only: %i[ show edit update destroy ]
+  before_action :set_email, only: %i[show edit update destroy]
 
   # GET /emails or /emails.json
   def index
@@ -7,8 +7,7 @@ class EmailsController < ApplicationController
   end
 
   # GET /emails/1 or /emails/1.json
-  def show
-  end
+  def show; end
 
   # GET /emails/new
   def new
@@ -16,20 +15,22 @@ class EmailsController < ApplicationController
   end
 
   # GET /emails/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /emails or /emails.json
   def create
-    @email = Email.new(email_params)
+    @email = Email.new(
+      object: Faker::TvShows::SiliconValley.unique.app,
+      body: Faker::TvShows::SiliconValley.unique.quote
+    )
 
     respond_to do |format|
       if @email.save
-        format.html { redirect_to email_url(@email), notice: "Email was successfully created." }
-        format.json { render :show, status: :created, location: @email }
+        # format.html { redirect_to email_url(@email), notice: 'Email was successfully created.' }
+        format.js { render :create }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @email.errors, status: :unprocessable_entity }
+        # format.html { render :new, status: :unprocessable_entity }
+        # format.js { render json: @email.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -38,7 +39,7 @@ class EmailsController < ApplicationController
   def update
     respond_to do |format|
       if @email.update(email_params)
-        format.html { redirect_to email_url(@email), notice: "Email was successfully updated." }
+        format.html { redirect_to email_url(@email), notice: 'Email was successfully updated.' }
         format.json { render :show, status: :ok, location: @email }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +53,20 @@ class EmailsController < ApplicationController
     @email.destroy
 
     respond_to do |format|
-      format.html { redirect_to emails_url, notice: "Email was successfully destroyed." }
+      format.html { redirect_to emails_url, notice: 'Email was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_email
-      @email = Email.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def email_params
-      params.require(:email).permit(:object, :body)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_email
+    @email = Email.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def email_params
+    params.require(:email).permit(:object, :body)
+  end
 end

@@ -1,12 +1,11 @@
 
-<%= link_to "Create an email", new_email_path %>
-<%= button_to "Receive email", new_email_path, class: "btn" %>
+<%= button_to "Receive email", emails_path, class: "btn", remote: true %>
 <section class="w-full h-full flex border-2 rounded-lg">
   <div class="flex flex-col flex-1 h-full border-r">
     <h2 class="self-center">All emails</h2>
     <ul>
       <% @emails.each do |email| %>
-        <li class="my-4 mx-8 place-self-start text-lg font-semibold"><%= email.object %></li>
+        <li class="my-4 mx-8 place-self-start text-lg"><%= email.object %></li>
       <% end %>
     </ul>
   </div>
