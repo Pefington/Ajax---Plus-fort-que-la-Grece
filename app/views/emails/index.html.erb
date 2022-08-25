@@ -4,7 +4,11 @@
     <h2 class="self-center">All emails</h2>
     <ul>
       <% @emails.each do |email| %>
-        <li id="email-<%= email.id %>" class="my-4 place-self-start text-lg"><%= link_to  email.object, email, remote: true %></li>
+        <% if email.read %>
+          <li id="email-<%= email.id %>" class="read"><%= link_to email.object, email, remote: true %></li>
+        <% else %>
+          <li id="email-<%= email.id %>" class="unread"><%= link_to email.object, email, remote: true %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>

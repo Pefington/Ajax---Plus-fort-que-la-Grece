@@ -2,7 +2,7 @@
   <h3 class="my-4 text-lg font-semibold underline"><%= email.object %></h3>
   <p><%= email.body %></p>
   <div class="flex justify-center w-full">
-    <%= button_to 'Delete', email, method: :delete, remote: true %>
-    <%= link_to 'Mark unread', edit_email_path(@email), class: "btn" %>
+    <%= button_to 'Delete', email, method: :delete, data: {confirm: "Confirm?"}, remote: true %>
+    <%= link_to 'Mark unread', emails_toggle_read_path, method: :patch, remote: true, class: "btn" %>
   </div>
 </article>

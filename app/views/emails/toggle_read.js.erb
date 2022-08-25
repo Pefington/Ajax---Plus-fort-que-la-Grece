@@ -1,18 +1,14 @@
 id = "#email-<%= @email.id %>"
 email = document.querySelector(id)
-container = document.querySelector("#show")
-article = document.querySelector("article")
-
-if (article) article.remove()
-
-container.insertAdjacentHTML("beforeend", "<%= j render 'email', email: @email %>")
-
+button = document.querySelector("div > a")
 isRead = <%= @email.read %>
 
 if (isRead) {
   email.classList.remove("unread")
   email.classList.add("read")
+  button.textContent = "Mark Unread"
 } else {
   email.classList.remove("read")
   email.classList.add("unread")
+  button.textContent = "Mark as Read"
 }

@@ -9,6 +9,17 @@ class EmailsController < ApplicationController
   # GET /emails/1 or /emails/1.json
   def show
     @email = Email.find(params[:id])
+    @email.update!(read: true)
+
+    respond_to do |format|
+      format.html { render :show }
+      format.js
+    end
+  end
+
+  def toggle_read
+    @email = Email.find(params[:id])
+    @email.update!(read: !@email.read)
 
     respond_to do |format|
       format.html { render :show }
@@ -28,7 +39,8 @@ class EmailsController < ApplicationController
   def create
     @email = Email.new(
       object: Faker::TvShows::SiliconValley.app,
-      body: Faker::TvShows::SiliconValley.quote
+      body: Faker::TvShows::SiliconValley.quote,
+      read: false
     )
 
     respond_to do |format|
@@ -74,6 +86,6 @@ class EmailsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def email_params
-    params.require(:email).permit(:object, :body)
+    params.require(:email).permit(:object, :body, :read)
   end
 end
